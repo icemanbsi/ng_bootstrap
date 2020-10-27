@@ -1,3 +1,7 @@
+## 1.2.0-alpha.2
+
+- upgrade `intl` to `0.16.0`
+
 ## 1.2.0-alpha.1
 
 - upgrade `font_awesome` to `5.10.1`
