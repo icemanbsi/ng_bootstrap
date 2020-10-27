@@ -1,5 +1,9 @@
 ## 1.2.0-alpha.2
 
+- upgrade `angular_forms` to `3.0.0`
+
+## 1.2.0-alpha.2
+
 - upgrade `intl` to `0.16.0`
 
 ## 1.2.0-alpha.1
