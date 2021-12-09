@@ -1,10 +1,10 @@
 library table.table_data_complex;
 
-import 'package:dson/dson.dart';
+// import 'package:dson/dson.dart';
 
 part 'table_data_complex.g.dart';
 
-@serializable
+// @serializable
 class Employee extends _$EmployeeSerializable {
   @override
   String name;
@@ -22,7 +22,7 @@ class Employee extends _$EmployeeSerializable {
   Address address;
 }
 
-@serializable
+// @serializable
 class Address extends _$AddressSerializable {
   @override
   String street;

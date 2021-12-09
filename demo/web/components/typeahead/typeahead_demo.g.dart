@@ -6,7 +6,7 @@ part of typeahead.typeahead_demo;
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$StateSerializable extends SerializableMap {
+abstract class _$StateSerializable {// extends SerializableMap {
   int get id;
   String get name;
   set id(int v);
@@ -22,7 +22,7 @@ abstract class _$StateSerializable extends SerializableMap {
       case 'toString':
         return toString;
     }
-    throwFieldNotFoundException(__key, 'State');
+    // throwFieldNotFoundException(__key, 'State');
   }
 
   operator []=(Object __key, __value) {
@@ -34,10 +34,10 @@ abstract class _$StateSerializable extends SerializableMap {
         name = __value;
         return;
     }
-    throwFieldNotFoundException(__key, 'State');
+    // throwFieldNotFoundException(__key, 'State');
   }
 
-  Iterable<String> get keys => StateClassMirror.fields.keys;
+  Iterable<String> get keys => null;//StateClassMirror.fields.keys;
 }
 
 // **************************************************************************
@@ -46,29 +46,29 @@ abstract class _$StateSerializable extends SerializableMap {
 
 _State__Constructor([positionalParams, namedParams]) => State();
 
-const $$State_fields_id = DeclarationMirror(
-  name: 'id',
-  type: int,
-);
-const $$State_fields_name = DeclarationMirror(
-  name: 'name',
-  type: String,
-);
+// const $$State_fields_id = DeclarationMirror(
+//   name: 'id',
+//   type: int,
+// );
+// const $$State_fields_name = DeclarationMirror(
+//   name: 'name',
+//   type: String,
+// );
 
-const StateClassMirror = ClassMirror(name: 'State', constructors: {
-  '': FunctionMirror(name: '', $call: _State__Constructor)
-}, fields: {
-  'id': $$State_fields_id,
-  'name': $$State_fields_name
-}, getters: [
-  'id',
-  'name'
-], setters: [
-  'id',
-  'name'
-], methods: {
-  'toString': FunctionMirror(
-    name: 'toString',
-    returnType: String,
-  )
-});
+// const StateClassMirror = ClassMirror(name: 'State', constructors: {
+//   '': FunctionMirror(name: '', $call: _State__Constructor)
+// }, fields: {
+//   'id': $$State_fields_id,
+//   'name': $$State_fields_name
+// }, getters: [
+//   'id',
+//   'name'
+// ], setters: [
+//   'id',
+//   'name'
+// ], methods: {
+//   'toString': FunctionMirror(
+//     name: 'toString',
+//     returnType: String,
+//   )
+// });

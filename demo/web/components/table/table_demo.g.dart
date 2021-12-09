@@ -6,7 +6,7 @@ part of table.table_demo;
 // SerializableGenerator
 // **************************************************************************
 
-abstract class _$PostSerializable extends SerializableMap {
+abstract class _$PostSerializable{// extends SerializableMap {
   int get id;
   String get title;
   String get body;
@@ -27,7 +27,7 @@ abstract class _$PostSerializable extends SerializableMap {
       case 'userId':
         return userId;
     }
-    throwFieldNotFoundException(__key, 'Post');
+    // throwFieldNotFoundException(__key, 'Post');
   }
 
   operator []=(Object __key, __value) {
@@ -45,10 +45,10 @@ abstract class _$PostSerializable extends SerializableMap {
         userId = __value;
         return;
     }
-    throwFieldNotFoundException(__key, 'Post');
+    // throwFieldNotFoundException(__key, 'Post');
   }
 
-  Iterable<String> get keys => PostClassMirror.fields.keys;
+  Iterable<String> get keys =>null;// PostClassMirror.fields.keys;
 }
 
 // **************************************************************************
@@ -57,38 +57,38 @@ abstract class _$PostSerializable extends SerializableMap {
 
 _Post__Constructor([positionalParams, namedParams]) => Post();
 
-const $$Post_fields_id = DeclarationMirror(
-  name: 'id',
-  type: int,
-);
-const $$Post_fields_title = DeclarationMirror(
-  name: 'title',
-  type: String,
-);
-const $$Post_fields_body = DeclarationMirror(
-  name: 'body',
-  type: String,
-);
-const $$Post_fields_userId = DeclarationMirror(
-  name: 'userId',
-  type: int,
-);
+// const $$Post_fields_id = DeclarationMirror(
+//   name: 'id',
+//   type: int,
+// );
+// const $$Post_fields_title = DeclarationMirror(
+//   name: 'title',
+//   type: String,
+// );
+// const $$Post_fields_body = DeclarationMirror(
+//   name: 'body',
+//   type: String,
+// );
+// const $$Post_fields_userId = DeclarationMirror(
+//   name: 'userId',
+//   type: int,
+// );
 
-const PostClassMirror = ClassMirror(name: 'Post', constructors: {
-  '': FunctionMirror(name: '', $call: _Post__Constructor)
-}, fields: {
-  'id': $$Post_fields_id,
-  'title': $$Post_fields_title,
-  'body': $$Post_fields_body,
-  'userId': $$Post_fields_userId
-}, getters: [
-  'id',
-  'title',
-  'body',
-  'userId'
-], setters: [
-  'id',
-  'title',
-  'body',
-  'userId'
-]);
+// const PostClassMirror = ClassMirror(name: 'Post', constructors: {
+//   '': FunctionMirror(name: '', $call: _Post__Constructor)
+// }, fields: {
+//   'id': $$Post_fields_id,
+//   'title': $$Post_fields_title,
+//   'body': $$Post_fields_body,
+//   'userId': $$Post_fields_userId
+// }, getters: [
+//   'id',
+//   'title',
+//   'body',
+//   'userId'
+// ], setters: [
+//   'id',
+//   'title',
+//   'body',
+//   'userId'
+// ]);

@@ -1,7 +1,7 @@
 library ngbs.index;
 
 import 'package:angular/angular.dart';
-import 'package:dson/dson.dart';
+// import 'package:dson/dson.dart';
 
 import 'components/accordion/accordion_demo.dart';
 import 'components/alert/alert_demo.dart';
