@@ -7,10 +7,10 @@ part of ngbs.index;
 // **************************************************************************
 
 _initMirrors() {
-  initClassMirrors({
-    Post: PostClassMirror,
-    Employee: EmployeeClassMirror,
-    Address: AddressClassMirror,
-    State: StateClassMirror
-  });
+  // initClassMirrors({
+  //   Post: PostClassMirror,
+  //   Employee: EmployeeClassMirror,
+  //   Address: AddressClassMirror,
+  //   State: StateClassMirror
+  // });
 }

@@ -5,7 +5,7 @@ import 'dart:async';
 import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
-import 'package:dson/dson.dart';
+// import 'package:dson/dson.dart';
 import 'package:ng_bootstrap/ng_bootstrap.dart';
 
 part 'typeahead_demo.g.dart';
@@ -217,7 +217,7 @@ class TypeaheadDemo {
   }
 }
 
-@serializable
+// @serializable
 class State extends _$StateSerializable {
   @override
   int id;

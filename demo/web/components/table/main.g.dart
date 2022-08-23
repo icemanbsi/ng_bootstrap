@@ -7,9 +7,9 @@ part of table.main;
 // **************************************************************************
 
 _initMirrors() {
-  initClassMirrors({
-    Post: PostClassMirror,
-    Employee: EmployeeClassMirror,
-    Address: AddressClassMirror
-  });
+  // initClassMirrors({
+  //   Post: PostClassMirror,
+  //   Employee: EmployeeClassMirror,
+  //   Address: AddressClassMirror
+  // });
 }

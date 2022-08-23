@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
-import 'package:dson/dson.dart';
+// import 'package:dson/dson.dart';
 import 'package:http/browser_client.dart';
 import 'package:http/http.dart';
 import 'package:ng_bootstrap/components/pagination/pagination.dart';
@@ -140,14 +140,14 @@ class TableDemoComponent implements OnInit {
         + '_page=${remoteMapConfig.page}&_limit=${remoteMapConfig.itemsPerPage}';
     var response;
     if (falsey(remoteMapConfig.filterString)) {
-      response = await client.get(uri);
+      // response = await client.get(uri);
 //      remoteMapConfig.totalItems = int.parse(response.headers['x-total-count']);
       remoteMapConfig.totalItems = 100;
     } else {
-      response = await client.get('$uri&q=${remoteMapConfig.filterString}');
+      // response = await client.get('$uri&q=${remoteMapConfig.filterString}');
       remoteMapConfig.totalItems = int.parse(response.headers['x-total-count']);
     }
-    remoteMapConfig.rows = fromJson(response.body, [() => <Post>[], Post]);
+    // remoteMapConfig.rows = fromJson(response.body, [() => <Post>[], Post]);
   }
 
   void filterRemoteComplexRows([num currentPage = 1, BsColumnDirective column]) async {
@@ -166,18 +166,18 @@ class TableDemoComponent implements OnInit {
         + '_page=${remoteComplexConfig.page}&_limit=${remoteComplexConfig.itemsPerPage}';
     var response;
     if (falsey(remoteComplexConfig.filterString)) {
-      response = await client.get(uri);
+      // response = await client.get(uri);
 //      remoteMapConfig.totalItems = int.parse(response.headers['x-total-count']);
       remoteComplexConfig.totalItems = 100;
     } else {
-      response = await client.get('$uri&q=${remoteComplexConfig.filterString}');
+      // response = await client.get('$uri&q=${remoteComplexConfig.filterString}');
       remoteComplexConfig.totalItems = int.parse(response.headers['x-total-count']);
     }
-    remoteComplexConfig.rows = fromJson(response.body, [() => <Post>[], Post]);
+    // remoteComplexConfig.rows = fromJson(response.body, [() => <Post>[], Post]);
   }
 }
 
-@serializable
+// @serializable
 class Post extends _$PostSerializable {
   @override
   int id;
