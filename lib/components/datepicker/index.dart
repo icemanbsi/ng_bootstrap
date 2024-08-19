@@ -3,7 +3,7 @@ library bs_date_picker;
 import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:intl/intl.dart';
-import 'package:js_shims/js_shims.dart';
+import 'package:node_shims/node_shims.dart';
 import 'package:ng_bootstrap/components/dropdown/index.dart';
 import 'package:ng_bootstrap/components/button/toggle.dart';
 import 'package:angular_forms/angular_forms.dart';
@@ -46,9 +46,9 @@ const num STARTING_DAY = 0;
 
 const num YEAR_RANGE = 20;
 
-const DateTime MIN_DATE = null;
+const DateTime? MIN_DATE = null;
 
-const DateTime MAX_DATE = null;
+const DateTime? MAX_DATE = null;
 
 const bool SHORTCUT_PROPAGATION = false;
 

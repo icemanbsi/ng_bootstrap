@@ -23,7 +23,7 @@ class BsTableComponent implements OnInit, OnDestroy {
   }
 
   /// Saves the initial values coming from the html attribute
-  List _rows;
+  List _rows = [];
 
   /// Sets the value of the rows that will be displayed by the table
   @Input() set rows(List rows) {
@@ -33,10 +33,10 @@ class BsTableComponent implements OnInit, OnDestroy {
   }
 
   /// Value that handle the filtered and sorted rows
-  List rowsAux;
+  List rowsAux = [];
 
   /// Handles the rows that will be displayed by the current page
-  List rowsPage;
+  List rowsPage = [];
 
   dynamic/*String | Map<String, String>*/ _containerStyle;
 
@@ -48,11 +48,11 @@ class BsTableComponent implements OnInit, OnDestroy {
   }
 
   @ViewChild('tbodyInner')
-  Element tbodyInner;
+  Element? tbodyInner;
 
-  String tbodyInnerWidth;
+  String? tbodyInnerWidth;
 
-  Timer _tbodyInnerWidthTimer;
+  Timer? _tbodyInnerWidthTimer;
 
   final _tableChanged = StreamController<dynamic>.broadcast();
 
@@ -61,7 +61,7 @@ class BsTableComponent implements OnInit, OnDestroy {
 
   /// Handles the columns of the table
   @ContentChildren(BsColumnDirective)
-  List<BsColumnDirective> columns;
+  List<BsColumnDirective> columns = [];
 
   /// Sets if the table-columns are sortable or not
   @Input() bool sortable = true;
@@ -73,27 +73,27 @@ class BsTableComponent implements OnInit, OnDestroy {
   @Input() bool searchable = false;
 
   /// Sets the maximum items that will be displayed per page
-  num _itemsPerPage = 10;
+  int _itemsPerPage = 10;
 
   /// Gets the maximum items that will be displayed per page
-  num get itemsPerPage => _itemsPerPage;
+  int get itemsPerPage => _itemsPerPage;
 
   /// Sets the maximum items that will be displayed per page
-  @Input() set itemsPerPage(num itemsPerPage) {
+  @Input() set itemsPerPage(int? itemsPerPage) {
     _itemsPerPage = itemsPerPage ?? 10;
     pageNumber = 1;
   }
 
   /// Handles the current page number displayed
-  num _pageNumber = 1;
+  int _pageNumber = 1;
 
   /// Gets the current page number
-  num get pageNumber => _pageNumber;
+  int get pageNumber => _pageNumber;
 
-  List<bool> editing;
+  List<bool> editing = [];
 
   /// Sets the current page number
-  @Input() set pageNumber(num pageNumber) {
+  @Input() set pageNumber(int? pageNumber) {
     _pageNumber = pageNumber ?? 1;
     _pageNumberChangeCtrl.add(_pageNumber);
   }
@@ -135,7 +135,7 @@ class BsTableComponent implements OnInit, OnDestroy {
   void ngOnInit() {
     _tbodyInnerWidthTimer =
         Timer.periodic(Duration(milliseconds: 500),
-                (_) => tbodyInnerWidth = tbodyInner.getComputedStyle().width);
+                (_) => tbodyInnerWidth = tbodyInner?.getComputedStyle().width);
   }
 
   void selectAll() {
@@ -160,7 +160,7 @@ class BsTableComponent implements OnInit, OnDestroy {
 
   /// Updates the items displayed in the page whenever occurs a [pageNumberChange]
   @HostListener('pageNumberChange', ['\$event'])
-  void updatePage(num pageNumber) {
+  void updatePage(int pageNumber) {
     var startIndex = (pageNumber - 1) * itemsPerPage;
     var endIndex = min(rowsAux.length, startIndex + itemsPerPage);
     rowsPage = rowsAux.getRange(startIndex, endIndex).toList();
@@ -273,7 +273,7 @@ class BsTableComponent implements OnInit, OnDestroy {
 
   @override
   void ngOnDestroy() {
-    _tbodyInnerWidthTimer.cancel();
+    _tbodyInnerWidthTimer?.cancel();
   }
 
   void handleFilterChange(Event event, BsColumnDirective column) {

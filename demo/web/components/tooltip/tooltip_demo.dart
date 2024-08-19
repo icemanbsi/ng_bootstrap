@@ -23,5 +23,5 @@ class TooltipDemo {
   String dynamicTooltip = 'Hello, World!';
   String dynamicTooltipText = 'dynamic';
   String htmlTooltip = "I've been made <b>bold</b>!";
-  String inputModel;
+  String? inputModel;
 }

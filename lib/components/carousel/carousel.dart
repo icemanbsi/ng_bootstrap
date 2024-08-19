@@ -1,6 +1,6 @@
 import 'package:angular/angular.dart';
 
-import 'package:js_shims/js_shims.dart';
+import 'package:node_shims/node_shims.dart';
 import 'dart:async';
 
 /// List of Directives needed to create a carousel
@@ -27,18 +27,18 @@ class BsCarouselComponent implements OnDestroy, AfterContentInit {
 
   /// if `true` the carousel will not cycle continuously and will have hard stops (prevent looping)
   @Input()
-  bool noWrap;
+  bool noWrap = false;
 
   /// if `true` the carousel is not going to have transitions between slides
   @Input()
-  bool noTransition;
+  bool noTransition = false;
 
   /// provides the slides of the carousel
   @ContentChildren(BsSlideComponent)
   List<BsSlideComponent> slides = [];
 
   /// the interval of time of the current slide
-  Timer currentInterval;
+  Timer? currentInterval;
 
   /// check if the carousel is playing, in that case slides are changing
   bool isPlaying = false;
@@ -47,11 +47,11 @@ class BsCarouselComponent implements OnDestroy, AfterContentInit {
   bool destroyed = false;
 
   /// currently active slide
-  BsSlideComponent currentSlide;
+  BsSlideComponent? currentSlide;
 
   /// amount of time in milliseconds to delay between automatically cycling an item. If `false`, carousel will not automatically cycle
   @Input()
-  num interval;
+  int? interval;
 
   @override
   void ngAfterContentInit() {
@@ -84,8 +84,8 @@ class BsCarouselComponent implements OnDestroy, AfterContentInit {
     slide.direction = direction;
     slide.active = true;
     if (currentSlide != null) {
-      currentSlide.direction = direction;
-      currentSlide.active = false;
+      currentSlide!.direction = direction;
+      currentSlide!.active = false;
     }
     currentSlide = slide;
     // every time you change slides, reset the timer
@@ -98,7 +98,7 @@ class BsCarouselComponent implements OnDestroy, AfterContentInit {
 
   /// gets the index of the current selected slide
   int getCurrentIndex() =>
-      falsey(currentSlide) ? 0 : currentSlide.index;
+      (currentSlide == null || falsey(currentSlide!)) ? 0 : (currentSlide?.index ?? 0);
 
   /// listen when a user wants to go to next slide
   void next() {
@@ -123,10 +123,10 @@ class BsCarouselComponent implements OnDestroy, AfterContentInit {
   /// restart the timer of the slides
   void restartTimer() {
     resetTimer();
-    var intervalAux = interval.toInt();
+    var intervalAux = interval?.toInt() ?? 0;
     if (intervalAux != double.nan && intervalAux > 0) {
       currentInterval = Timer(Duration(milliseconds: intervalAux), () {
-        var nInterval = interval;
+        var nInterval = interval ?? 0;
         if (isPlaying && intervalAux != double.nan && nInterval > 0 && truthy(slides.length)) {
           next();
         } else {
@@ -139,7 +139,7 @@ class BsCarouselComponent implements OnDestroy, AfterContentInit {
   /// stops the slides timer and reset its value
   void resetTimer() {
     if (truthy(currentInterval)) {
-      currentInterval.cancel();
+      currentInterval?.cancel();
       currentInterval = null;
     }
   }
@@ -198,9 +198,9 @@ class BsSlideComponent {
 
   /// provides the direction of the slides
   @Input()
-  Direction direction;
+  Direction direction = Direction.UNKNOWN;
 
   /// provides the position of the slide
   @Input()
-  num index;
+  int index = 0;
 }

@@ -31,7 +31,7 @@ class DemoHeader {
     'Typeahead'
   ];
 
-  String prefix;
+  late String prefix;
 
   bool isCollapsed = true;
 

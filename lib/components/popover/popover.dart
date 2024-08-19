@@ -16,7 +16,7 @@ import 'dart:html';
     directives: [coreDirectives])
 class BsPopoverComponent extends BsTooltipComponent {
   /// Header of the popover
-  @Input() String heading;
+  @Input() String? heading;
 
   @override
   @HostBinding('class.bs-popover-top')

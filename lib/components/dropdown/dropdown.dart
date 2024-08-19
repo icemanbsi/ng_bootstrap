@@ -33,10 +33,10 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   bool keyboardNav = false;
 
   /// index of selected element
-  num selectedOption;
+  int? selectedOption;
 
   /// drop menu html
-  HtmlElement menuEl;
+  HtmlElement? menuEl;
 
   /// if `true` dropdown will be opened
   bool _isOpen = false;
@@ -45,9 +45,9 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   @HostBinding('class.show')
   bool get isOpen => _isOpen;
 
-  StreamSubscription _closeDropdownStSub;
+  StreamSubscription? _closeDropdownStSub;
 
-  StreamSubscription _keyBindFilterStSub;
+  StreamSubscription? _keyBindFilterStSub;
 
   /// if `true` the dropdown will be visible
   @Input()
@@ -79,7 +79,7 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   Stream<bool> get isOpenChange => _isOpenChangeCtrl.stream;
 
   @ContentChild(BsDropdownToggleDirective)
-  BsDropdownToggleDirective dropdownToggle;
+  late BsDropdownToggleDirective dropdownToggle;
 
   /// initializes the dropdown attributes
   @override
@@ -99,7 +99,7 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   @override
   void ngOnDestroy() {
     if (dropdownAppendToBody && truthy(menuEl)) {
-      menuEl.remove();
+      menuEl?.remove();
     }
   }
 
@@ -108,17 +108,17 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     // init drop down menu
     menuEl = dropdownMenu.elementRef;
     if (dropdownAppendToBody) {
-      window.document.documentElement.children.add(menuEl);
+      window.document.documentElement?.children.add(menuEl!);
     }
   }
 
   /// toggles the visibility of the dropdown-menu
-  bool toggle([bool open]) {
+  bool toggle([bool? open]) {
     return isOpen = open ?? !isOpen;
   }
 
   /// focus the specified entry of dropdown in dependence of the [keyCode]
-  void focusDropdownEntry(num keyCode) {
+  void focusDropdownEntry(int keyCode) {
     // If append to body is used.
     var hostEl = menuEl ?? elementRef.querySelectorAll('ul')[0];
     if (hostEl == null) {
@@ -132,27 +132,27 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     }
     switch (keyCode) {
       case (KeyCode.DOWN):
-        if (selectedOption is! num) {
+        if (selectedOption == null) {
           selectedOption = 0;
           break;
         }
         if (identical(selectedOption, elements.length - 1)) {
           break;
         }
-        selectedOption++;
+        selectedOption = selectedOption! + 1;
         break;
       case (KeyCode.UP):
-        if (selectedOption is! num) {
+        if (selectedOption == null) {
           return;
         }
         if (identical(selectedOption, 0)) {
           // todo: return?
           break;
         }
-        selectedOption--;
+        selectedOption = selectedOption! - 1;
         break;
     }
-    elements[selectedOption].focus();
+    elements[selectedOption!].focus();
   }
 
   /// focus toggle element
@@ -168,7 +168,7 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
     if (keyboardNav && isOpen && (event.which == KeyCode.UP || event.which == KeyCode.DOWN)) {
       event.preventDefault();
       event.stopPropagation();
-      focusDropdownEntry(event.which);
+      focusDropdownEntry(event.which ?? 0);
     }
   }
 }

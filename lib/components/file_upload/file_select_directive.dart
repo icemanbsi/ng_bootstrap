@@ -9,6 +9,8 @@ class BsFileSelectDirective {
 
   @HostListener('change', ['\$event'])
   void onChange(Event event) {
-    _filesChangeCtrl.add((event.target as InputElement).files);
+    if((event.target as InputElement).files != null){
+      _filesChangeCtrl.add((event.target as InputElement).files!);
+    }
   }
 }

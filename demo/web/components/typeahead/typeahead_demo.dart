@@ -10,7 +10,7 @@ import 'package:ng_bootstrap/ng_bootstrap.dart';
 
 part 'typeahead_demo.g.dart';
 
-@Component (selector: 'typeahead-demo',
+@Component(selector: 'typeahead-demo',
     templateUrl: 'typeahead_demo.html',
     directives: [BsTypeAheadComponent, coreDirectives, formDirectives/*, BsRenderer*/])
 class TypeaheadDemo {
@@ -20,7 +20,7 @@ class TypeaheadDemo {
 
   var selectedItem;
 
-  State selectedItemObj;
+  State? selectedItemObj;
 
   String selectedAsync = '';
 
@@ -220,9 +220,9 @@ class TypeaheadDemo {
 // @serializable
 class State extends _$StateSerializable {
   @override
-  int id;
+  int id = 0;
   @override
-  String name;
+  String name = '';
 
   @override
   String toString() => '{id: $id, name: $name}';

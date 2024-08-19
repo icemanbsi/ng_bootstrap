@@ -4,7 +4,7 @@ import 'package:angular/angular.dart';
 
 /// Provide contextual feedback messages for typical user actions
 /// with the handful of available and flexible alert messages.
-@Component (
+@Component(
     selector: 'bs-alert',
     styles: [':host { display:block; }'],
     template: '''
@@ -32,7 +32,7 @@ class BsAlertComponent implements OnInit {
 
   /// number of milliseconds, if specified sets a timeout duration,
   /// after which the alert will be closed
-  @Input() int timeout;
+  @Input() int? timeout;
 
   @Input()
   @HostBinding('class.alert-dismissible')
@@ -63,7 +63,7 @@ class BsAlertComponent implements OnInit {
   @override
   void ngOnInit() {
     if (hasTimeout) {
-      Timer(Duration(milliseconds: timeout), close);
+      Timer(Duration(milliseconds: timeout!), close);
     }
   }
 

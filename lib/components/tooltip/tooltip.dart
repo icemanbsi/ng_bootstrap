@@ -12,7 +12,7 @@ import 'dart:html';
 </div>''',
     directives: [coreDirectives])
 class BsTooltipComponent implements OnInit {
-  ChangeDetectorRef cdr;
+  ChangeDetectorRef? cdr;
 
   /// Current element DOM reference
   HtmlElement elementRef;
@@ -31,11 +31,11 @@ class BsTooltipComponent implements OnInit {
 
   /// value in pixels of the top style
   @HostBinding('style.top')
-  String top;
+  String? top;
 
   /// value in pixels of the left style
   @HostBinding('style.left')
-  String left;
+  String? left;
 
   /// display style of the tooltip
   @HostBinding('style.display')
@@ -45,11 +45,11 @@ class BsTooltipComponent implements OnInit {
   String placement = 'top';
 
   /// if `true` tooltip is currently visible
-  bool isOpen;
+  bool isOpen = false;
 
   /// (*not implemented*) (`?string`) -
   /// custom tooltip class applied to the tooltip container.
-  String popupClass;
+  String? popupClass;
 
   /// if `false` fade tooltip animation will be disabled
   @Input()
@@ -57,7 +57,7 @@ class BsTooltipComponent implements OnInit {
   bool animation = true;
 
   @Input('for')
-  Element hostEl;
+  Element? hostEl;
 
   /// String of event name which triggers tooltip opening
   @Input()
@@ -72,9 +72,9 @@ class BsTooltipComponent implements OnInit {
 
   bool _enable = true;
 
-  Timer showTimer;
+  Timer? showTimer;
 
-  Timer hideTimer;
+  Timer? hideTimer;
 
   /// if `false` tooltip is disabled and will not be shown
   @Input()
@@ -96,8 +96,8 @@ class BsTooltipComponent implements OnInit {
   @override
   void ngOnInit() {
     hostEl ??= elementRef.parent;
-    hostEl.on[showEvent].listen((_) => show());
-    hostEl.on[hideEvent].listen((_) => hide());
+    hostEl!.on[showEvent].listen((_) => show());
+    hostEl!.on[hideEvent].listen((_) => hide());
   }
 
   void show() {
@@ -107,7 +107,7 @@ class BsTooltipComponent implements OnInit {
     hideTimer?.cancel();
     showTimer = Timer(Duration(milliseconds: popupDelay), () {
       var p = positionElements(
-          hostEl, elementRef, placement, false);
+          hostEl!, elementRef, placement, false);
       top = '${p.top}px';
       left = '${p.left}px';
       classIn = true;

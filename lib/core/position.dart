@@ -1,6 +1,6 @@
 import 'dart:html';
 
-// import 'package:js_shims/js_shims.dart';
+// import 'package:node_shims/node_shims.dart';
 
 // Document get _document => window.document;
 
@@ -57,31 +57,31 @@ Position positionElements(Element hostEl,
   switch (pos0) {
     case 'right' :
       targetElPos = Position(
-          top: shiftHeight[pos1](),
-          left: shiftWidth[pos0]());
+          top: shiftHeight[pos1]!(),
+          left: shiftWidth[pos0]!());
       break;
     case 'left' :
       targetElPos = Position(
-          top: shiftHeight[pos1](),
+          top: shiftHeight[pos1]!(),
           left: hostElPos.left - targetElWidth);
       break;
     case 'bottom' :
       targetElPos = Position(
-          top: shiftHeight[pos0](),
-          left: shiftWidth[pos1]());
+          top: shiftHeight[pos0]!(),
+          left: shiftWidth[pos1]!());
       break;
     default :
       targetElPos = Position(
           top: hostElPos.top - targetElHeight,
-          left: shiftWidth[pos1]());
+          left: shiftWidth[pos1]!());
   }
   return targetElPos;
 }
 
 /// Used to handle the position of the element
 class Position {
-  num top;
-  num left;
+  num? top;
+  num? left;
 
   String get topPx => top.toString() + 'px';
 

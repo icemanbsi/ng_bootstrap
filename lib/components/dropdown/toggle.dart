@@ -2,9 +2,9 @@ part of bs_dropdown;
 
 /// Creates a component that will toggle the state of a dropdown-menu,
 /// in other words when clicked will open or close the dropdown-menu
-@Directive (selector: 'bs-dropdown-toggle, .dropdown-toggle')
+@Directive(selector: 'bs-dropdown-toggle, .dropdown-toggle')
 class BsDropdownToggleDirective {
-  BsDropdownDirective dropdown;
+  BsDropdownDirective? dropdown;
   /// Reference to this HTML element
   HtmlElement elementRef;
 
@@ -28,7 +28,7 @@ class BsDropdownToggleDirective {
     event.preventDefault();
     event.stopPropagation();
     if (!disabled) {
-      dropdown.toggle();
+      dropdown?.toggle();
     }
   }
 }

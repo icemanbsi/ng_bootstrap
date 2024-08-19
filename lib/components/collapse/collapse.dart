@@ -28,7 +28,7 @@ class BsCollapseDirective {
   /// Contains the element reference of this component
   HtmlElement elementRef;
 
-  Element _element;
+  late Element _element;
 
   final ChangeDetectorRef _changeDetectorRef;
 
@@ -76,9 +76,9 @@ class BsCollapseDirective {
 
   final _collapsingChangeController = StreamController<bool>.broadcast();
 
-  Timer showTimer;
+  Timer? showTimer;
 
-  Timer hideTimer;
+  Timer? hideTimer;
 
   /// Emits the collapsing state of the component
   @Output() Stream<bool> get collapsingChange =>

@@ -13,20 +13,22 @@ class BsFileDropDirective {
     _preventAndStop(event);
     var transfer = event.dataTransfer;
     _fileOverCtrl.add(false);
-    _filesChangeCtrl.add(transfer.files);
+    if(transfer.files != null){
+      _filesChangeCtrl.add(transfer.files!);
+    }
   }
 
-  @HostListener ('dragover', ['\$event'])
+  @HostListener('dragover', ['\$event'])
   void onDragOver(MouseEvent event) {
     _preventAndStop(event);
     var transfer = event.dataTransfer;
-    if (!transfer.types.contains('Files')) return;
+    if (!(transfer.types?.contains('Files') ?? false)) return;
 
     transfer.dropEffect = 'copy';
     _fileOverCtrl.add(true);
   }
 
-  @HostListener ('dragleave', ['\$event'])
+  @HostListener('dragleave', ['\$event'])
   void onDragLeave(Event event) {
     _preventAndStop(event);
     _fileOverCtrl.add(false);

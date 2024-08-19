@@ -31,31 +31,31 @@ class BsProgressComponent implements OnInit, OnDestroy {
 
   /// maximum value of the bar
   @Input()
-  num max;
+  double max = 100;
 
   /// value of the progress bar
   @Input()
-  num value;
+  double value = 0;
 
   String get percentage => (value / max * 100).toString() + '%';
 
   @ContentChild(TemplateRef)
-  TemplateRef labelTemplate;
+  late TemplateRef labelTemplate;
 
   /// Handles the width of the element
-  String elementWidth;
+  String? elementWidth;
 
   final HtmlElement _elementRef;
 
-  Timer _resizeTimer;
+  Timer? _resizeTimer;
 
   BsProgressComponent(this._elementRef);
 
   /// initialize the attributes
   @override
   void ngOnInit() {
-    animate ??= true;
-    max = max ??= 100;
+    // animate ??= true;
+    // max = max ??= 100;
     Element nativeElement = _elementRef;
     elementWidth = nativeElement.getComputedStyle().width;
     _resizeTimer =
@@ -64,7 +64,7 @@ class BsProgressComponent implements OnInit, OnDestroy {
 
   @override
   void ngOnDestroy() {
-   _resizeTimer.cancel();
+   _resizeTimer?.cancel();
   }
 
   Map<String, dynamic> basicLabelTemplateOutput(dynamic label) => {r'$implicit': label};

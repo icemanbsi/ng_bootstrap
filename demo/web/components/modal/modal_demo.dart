@@ -8,7 +8,7 @@ import 'package:ng_bootstrap/components/modal/modal.dart';
     templateUrl: 'modal_demo.html',
     directives: [BsModalComponent])
 class ModalDemo {
-  String modalAction;
+  late String modalAction;
   List<Map<String, dynamic>> get buttons => [
     {'label': 'Save', 'onClick': handleSave},
     {'label': 'Cancel', 'onClick': handleCancel, 'cssClasses': 'btn-secondary'}

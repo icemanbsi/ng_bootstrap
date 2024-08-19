@@ -22,7 +22,7 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
   BsDatePickerComponent(HtmlElement elementRef) : super(elementRef);
 
   /// provides access to entered value
-  DateTime value;
+  DateTime value = DateTime.now();
 
   /// provides the number of steps needed to change from other views to day view
   Map get stepDay => {'months': 1};
@@ -42,13 +42,13 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
   DateTime get _initDate => value ?? _now;
 
   @ViewChild(BsDayPickerComponent)
-  BsDayPickerComponent bsDayPickerComponent;
+  late BsDayPickerComponent bsDayPickerComponent;
 
   @ViewChild(BsMonthPickerComponent)
-  BsMonthPickerComponent bsMonthPickerComponent;
+  late BsMonthPickerComponent bsMonthPickerComponent;
 
   @ViewChild(BsYearPickerComponent)
-  BsYearPickerComponent bsYearPickerComponent;
+  late BsYearPickerComponent bsYearPickerComponent;
 
   // todo: add formatter value to DateTime object
   /// initializes attributes
@@ -96,7 +96,7 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
   /// * 0 if equals
   /// * -1 if [date1] is before [date2]
   /// * 1 if [date1] is after [date2]
-  num compare(DateTime date1, DateTime date2) {
+  num? compare(DateTime date1, DateTime? date2) {
     if (date2 == null) return null;
 
     if (datePickerMode == 'day') {
@@ -136,10 +136,10 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
 
   // todo: implement dateDisabled attribute
   /// returns `true` if [date] is before [minDate] or after [maxDate]
-  bool isDisabled(DateTime date) => minDate != null && compare(date, minDate) < 0 || maxDate != null && compare(date, maxDate) > 0;
+  bool isDisabled(DateTime date) => minDate != null && (compare(date, minDate) ?? 0) < 0 || maxDate != null && (compare(date, maxDate) ?? 0) > 0;
 
   /// splits the [arr] into a list of array of size [size]
-  List<List<DisplayedDate>> split(List arr, num size) {
+  List<List<DisplayedDate>> split(List<DisplayedDate> arr, int size) {
     var arrays = <List<DisplayedDate>>[];
     for (var i = 0; arr.length > i * size; i++) {
       arrays.add(arr.getRange(i * size, i * size + size).toList());
@@ -167,7 +167,7 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
   /// changes the view values in dependence of the [direction]
   ///
   /// this is fired when users clicks on arrow buttons
-  void move(num direction, [dynamic event]) {
+  void move(int direction, [dynamic event]) {
     if (event) event.stopPropagation();
     var expectedStep = datePickerMode == 'day'
         ? stepDay
@@ -178,8 +178,8 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
                 : null;
 
     if (expectedStep != null) {
-      var year = _initDate.year + direction * (expectedStep['years'] ?? 0);
-      var month = _initDate.month + direction * (expectedStep['months'] ?? 0);
+      int year = _initDate.year + direction * ((expectedStep['years'] as int?) ?? 0);
+      int month = _initDate.month + direction * ((expectedStep['months'] as int?) ?? 0);
       writeValue(DateTime(year, month, 1));
     }
   }
@@ -187,7 +187,7 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
   /// toggles the view mode in dependence of the [direction]
   ///
   /// this is fired when users clicks on day, month, or year header buttons
-  void toggleMode([num direction, dynamic event]) {
+  void toggleMode([int? direction, dynamic event]) {
     event?.stopPropagation();
     direction ??= 1;
     if ((datePickerMode == maxMode && direction == 1) || (datePickerMode == minMode && direction == -1)) {
@@ -203,63 +203,63 @@ abstract class BsDatePickerBase extends Object with TouchHandler, ChangeHandler<
 
   /// sets date-picker mode, supports: `day`, `month`, `year`
   @Input()
-  String datePickerMode;
+  String datePickerMode = 'day';
 
   /// oldest selectable date
   @Input()
-  DateTime minDate;
+  DateTime? minDate;
 
   /// latest selectable date
   @Input()
-  DateTime maxDate;
+  DateTime? maxDate;
 
   /// set lower datepicker mode, supports: `day`, `month`, `year`
   @Input()
-  String minMode;
+  String minMode = 'day';
 
   /// sets upper datepicker mode, supports: `day`, `month`, `year`
   @Input()
-  String maxMode;
+  String maxMode = 'day';
 
   /// if `false` week numbers will be hidden
   @Input()
-  bool showWeeks;
+  bool showWeeks = false;
 
   /// format of day in month
   @Input()
-  String formatDay;
+  String? formatDay;
 
   /// format of month in year
   @Input()
-  String formatMonth;
+  String? formatMonth;
 
   /// format of year in year range
   @Input()
-  String formatYear;
+  String? formatYear;
 
   /// format of day in week header
   @Input()
-  String formatDayHeader;
+  String? formatDayHeader;
 
   /// format of title when selecting day
   @Input()
-  String formatDayTitle;
+  String? formatDayTitle;
 
   /// format of title when selecting month
   @Input()
-  String formatMonthTitle;
+  String? formatMonthTitle;
 
   /// starting day of the week from 0-6 (0=Sunday, ..., 6=Saturday).
   @Input()
-  num startingDay;
+  int startingDay = 0;
 
   /// number of years displayed in year selection
   @Input()
-  num yearRange;
+  int yearRange = 1;
 
   /// if `true` shortcut`s event propagation will be disabled
   @Input()
-  bool shortcutPropagation;
+  bool shortcutPropagation = false;
 
   // todo: change type during implementation
   /// array of custom classes to be applied to targeted dates
@@ -274,7 +274,7 @@ abstract class BsDatePickerBase extends Object with TouchHandler, ChangeHandler<
 
   @override
   void registerOnChange(ChangeFunction<DateTime> fn) =>
-      onChange = (dynamic/*<DateTime | String>*/ value, {String rawValue}) =>
+      onChange = (dynamic/*<DateTime | String>*/ value, {String? rawValue}) =>
           fn(value == '' ? DateTime.now() : value);
 
   @override
@@ -294,5 +294,5 @@ class DisplayedDate {
   final bool selected;
   final bool disabled;
   final bool current;
-  bool secondary;
+  bool secondary = false;
 }

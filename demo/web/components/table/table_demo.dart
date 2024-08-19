@@ -10,7 +10,7 @@ import 'package:http/http.dart';
 import 'package:ng_bootstrap/components/pagination/pagination.dart';
 import 'package:ng_bootstrap/components/table/table_directives.dart';
 import 'package:ng_bootstrap/components/tabsx/tabsx.dart';
-import 'package:js_shims/js_shims.dart';
+import 'package:node_shims/node_shims.dart';
 import 'table_data.dart';
 import 'table_data_complex.dart';
 export 'table_data_complex.dart';
@@ -21,20 +21,20 @@ class TableConfig {
   num page = 1;
   num itemsPerPage = 10;
   num maxSize = 5;
-  num totalPages;
+  num totalPages = 0;
   num totalItems = 0;
-  bool selectable;
+  bool selectable = false;
   bool hideSelectColumn = false;
   bool editable = false;
   bool searchable = false;
   String filteredColumn = 'position';
   List rows = [];
-  String filterString;
-  BsColumnDirective sortedColumn;
-  Timer debounceTimer;
+  String filterString = '';
+  BsColumnDirective? sortedColumn;
+  Timer? debounceTimer;
 }
 
-@Component (selector: 'table-demo',
+@Component(selector: 'table-demo',
     templateUrl: 'table_demo.html',
     directives: [
       bsTableDirectives,
@@ -124,7 +124,7 @@ class TableDemoComponent implements OnInit {
     }
   }
 
-  void filterRemoteRows([num currentPage = 1, BsColumnDirective column]) async {
+  void filterRemoteRows([num currentPage = 1, BsColumnDirective? column]) async {
     if (remoteMapConfig.debounceTimer != null) return;
     remoteMapConfig.debounceTimer = Timer(Duration(milliseconds: 500), () {
       remoteMapConfig.debounceTimer = null;
@@ -150,7 +150,7 @@ class TableDemoComponent implements OnInit {
     // remoteMapConfig.rows = fromJson(response.body, [() => <Post>[], Post]);
   }
 
-  void filterRemoteComplexRows([num currentPage = 1, BsColumnDirective column]) async {
+  void filterRemoteComplexRows([num currentPage = 1, BsColumnDirective? column]) async {
     if (remoteComplexConfig.debounceTimer != null) return;
     remoteComplexConfig.debounceTimer = Timer(Duration(milliseconds: 500), () {
       remoteComplexConfig.debounceTimer = null;
@@ -180,11 +180,11 @@ class TableDemoComponent implements OnInit {
 // @serializable
 class Post extends _$PostSerializable {
   @override
-  int id;
+  int id = 0;
   @override
-  String title;
+  String title = '';
   @override
-  String body;
+  String body = '';
   @override
-  int userId;
+  int userId = 0;
 }

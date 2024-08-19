@@ -16,6 +16,6 @@ class InputDemo {
 }
 
 class Person {
-  String firstName;
-  String lastName;
+  late String firstName;
+  late String lastName;
 }

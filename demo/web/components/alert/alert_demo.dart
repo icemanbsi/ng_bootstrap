@@ -11,7 +11,7 @@ class AlertDemo {
     {'type': 'success', 'msg': 'Well done! You successfully read this important alert message.', 'dismissible': true}
   ];
 
-  void closeAlert(num i) {
+  void closeAlert(int i) {
     alerts.removeAt(i);
   }
 

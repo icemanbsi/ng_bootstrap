@@ -4,16 +4,16 @@ import 'package:angular/angular.dart';
 import 'package:ng_bootstrap/ng_bootstrap.dart';
 import 'package:string_converters/string_converters.dart';
 
-@Component (
+@Component(
     selector: 'demo-section',
     templateUrl: 'demo_section.html',
     directives: [bsDirectives])
 class DemoSection implements OnInit {
-  @Input() String name;
+  @Input() String name = '';
 
-  @Input() String docPath;
+  @Input() String? docPath;
 
-  String nameTN, docUrl, dart, html;
+  late String nameTN, docUrl, dart, html;
 
   ViewContainerRef viewRef;
 

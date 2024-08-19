@@ -69,7 +69,7 @@ abstract class _$EmployeeSerializable{// extends SerializableMap {
     // throwFieldNotFoundException(__key, 'Employee');
   }
 
-  Iterable<String> get keys => null;// EmployeeClassMirror.fields.keys;
+  Iterable<String>? get keys => null;// EmployeeClassMirror.fields.keys;
 }
 
 abstract class _$AddressSerializable{// extends SerializableMap {
@@ -93,7 +93,7 @@ abstract class _$AddressSerializable{// extends SerializableMap {
     // throwFieldNotFoundException(__key, 'Address');
   }
 
-  Iterable<String> get keys => null;//AddressClassMirror.fields.keys;
+  Iterable<String>? get keys => null;//AddressClassMirror.fields.keys;
 }
 
 // **************************************************************************

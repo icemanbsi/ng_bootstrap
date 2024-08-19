@@ -7,25 +7,25 @@ part 'table_data_complex.g.dart';
 // @serializable
 class Employee extends _$EmployeeSerializable {
   @override
-  String name;
+  String name = '';
   @override
-  String position;
+  String position = '';
   @override
-  String office;
+  String office = '';
   @override
-  String ext;
+  String ext = '';
   @override
-  DateTime startDate;
+  DateTime startDate = DateTime.now();
   @override
-  double salary;
+  double salary = 0;
   @override
-  Address address;
+  Address address = Address();
 }
 
 // @serializable
 class Address extends _$AddressSerializable {
   @override
-  String street;
+  String street = '';
 }
 
 final List<Employee> dataComplex = [

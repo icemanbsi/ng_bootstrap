@@ -144,7 +144,7 @@ class FileType {
     if (types[extension] == null) {
       return 'application';
     } else {
-      return types[extension];
+      return types[extension]!;
     }
   }
 }

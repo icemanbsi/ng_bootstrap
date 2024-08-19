@@ -15,7 +15,7 @@ DateTime addMinutes(DateTime time, int minutes) => time.add(Duration(minutes: mi
 /// A lightweight & configurable timepicker directive
 ///
 /// [demo](http://dart-league.github.io/ng_bootstrap/#timepicker)
-@Component (selector: 'bs-time-picker',
+@Component(selector: 'bs-time-picker',
     templateUrl: 'timepicker.html',
     directives: [coreDirectives, formDirectives])
 class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
@@ -29,10 +29,10 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
   DateTime _selected = DateTime.now();
 
   /// hours change step
-  @Input() num hourStep = 1;
+  @Input() int hourStep = 1;
 
   /// minutes change step
-  @Input() num minuteStep = 1;
+  @Input() int minuteStep = 1;
 
   /// ['AM', 'PM'] - meridian labels based on locale (*will be based later*)
   dynamic meridian;
@@ -53,16 +53,16 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
   @Input() bool showSpinners = true;
 
   /// minimum time user can select
-  @Input() DateTime min;
+  @Input() DateTime? min;
 
   /// maximum time user can select
-  @Input() DateTime max;
+  @Input() DateTime? max;
 
   /// value of hours shown in the input
-  String hours;
+  String? hours;
 
   /// value of minutes shown in the input
-  String minutes;
+  String? minutes;
 
   /// selected DateTime to handle time
   DateTime get selected {
@@ -123,7 +123,7 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
 //  }
 
   /// refresh the template
-  void refresh([ String type ]) {
+  void refresh([ String? type ]) {
     // this.makeValid();
     updateTemplate();
     cd.viewToModelUpdate(selected.toIso8601String());
@@ -150,9 +150,9 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
   }
 
   /// get the value of hours from template
-  int getHoursFromTemplate() {
-    var hours = int.tryParse(this.hours) ?? 0;
-    var valid = showMeridian ? (hours > 0 && hours < 13) : (hours >= 0 &&
+  int? getHoursFromTemplate() {
+    var hours = this.hours != null ? int.tryParse(this.hours!) : 0;
+    var valid = showMeridian ? (hours! > 0 && hours < 13) : (hours! >= 0 &&
         hours < 24);
     if (!valid) {
       return null;
@@ -169,8 +169,8 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
   }
 
   /// parse the minutes string from the template
-  int getMinutesFromTemplate() {
-    var _minutes = int.tryParse(minutes) ?? 0;
+  int? getMinutesFromTemplate() {
+    var _minutes = int.tryParse(minutes!) ?? 0;
     return (_minutes >= 0 && _minutes < 60) ? _minutes : null;
   }
 
@@ -197,8 +197,8 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
     var hours = getHoursFromTemplate();
     var minutes = getMinutesFromTemplate();
     if (hours == null || minutes == null) {}
-    selected = _updateDateTime(selected, hours: hours);
-    if (min != null && !(selected.isBefore(min) || max != null && selected.isAfter(max))) {
+    selected = _updateDateTime(selected, hours: hours!);
+    if (min != null && !(selected.isBefore(min!) || max != null && selected.isAfter(max!))) {
       refresh('h');
     }
   }
@@ -209,7 +209,7 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
       return;
     }
     // todo: binded with validation
-    if (!invalidHours && int.parse(hours) < 10) {
+    if (!invalidHours && int.parse(hours!) < 10) {
       hours = pad(hours);
     }
   }
@@ -224,13 +224,13 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
     if (minutes == null || hours == null) {}
     selected = _updateDateTime(selected, minutes: minutes);
 //    selected.minute = minutes;
-    if (!(min != null && selected.isBefore(min) || max != null && selected.isAfter(max))) {
+    if (!(min != null && selected.isBefore(min!) || max != null && selected.isAfter(max!))) {
       refresh('m');
     }
   }
 
   /// update the whole datetime value
-  DateTime _updateDateTime(DateTime selected, {int minutes, int hours}) =>
+  DateTime _updateDateTime(DateTime selected, {int? minutes, int? hours}) =>
       DateTime(
           selected.year,
           selected.month,
@@ -244,7 +244,7 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
     if (readonlyInput) {
       return;
     }
-    if (!invalidMinutes && int.parse(minutes) < 10) {
+    if (!invalidMinutes && int.parse(minutes!) < 10) {
       minutes = pad(minutes);
     }
   }
@@ -252,29 +252,29 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
   /// check if hours should be incremented
   bool noIncrementHours() {
     var incrementedSelected = addMinutes(selected, hourStep * 60);
-    return min != null && incrementedSelected.isBefore(min)
-        || max != null && incrementedSelected.isAfter(selected) && incrementedSelected.isAfter(max);
+    return min != null && incrementedSelected.isBefore(min!)
+        || max != null && incrementedSelected.isAfter(selected) && incrementedSelected.isAfter(max!);
   }
 
   /// check if hours should be decremented
   bool noDecrementHours() {
     var decrementedSelected = addMinutes(selected, -hourStep * 60);
-    return min != null && decrementedSelected.isBefore(min)
-        || max != null && decrementedSelected.isAfter(selected) && decrementedSelected.isAfter(max);
+    return min != null && decrementedSelected.isBefore(min!)
+        || max != null && decrementedSelected.isAfter(selected) && decrementedSelected.isAfter(max!);
   }
 
   /// check if minutes should be incremented
   bool noIncrementMinutes() {
     var incrementedSelected = addMinutes(selected, minuteStep);
-    return min != null && incrementedSelected.isBefore(min)
-        || max != null && incrementedSelected.isAfter(selected) && incrementedSelected.isAfter(max);
+    return min != null && incrementedSelected.isBefore(min!)
+        || max != null && incrementedSelected.isAfter(selected) && incrementedSelected.isAfter(max!);
   }
 
   /// check if minutes should be decremented
   bool noDecrementMinutes() {
     var decrementedSelected = addMinutes(selected, -minuteStep);
-    return min != null && decrementedSelected.isBefore(min)
-        || max != null && decrementedSelected.isAfter(selected) && decrementedSelected.isAfter(max);
+    return min != null && decrementedSelected.isBefore(min!)
+        || max != null && decrementedSelected.isAfter(selected) && decrementedSelected.isAfter(max!);
   }
 
   /// add [minutes] to [selected]
@@ -286,9 +286,9 @@ class BsTimePickerComponent extends DefaultValueAccessor implements OnInit {
   /// check if meridian should be showed
   bool noToggleMeridian() {
     if (selected.hour < 13) {
-      return max != null && addMinutes(selected, 12 * 60).isAfter(max);
+      return max != null && addMinutes(selected, 12 * 60).isAfter(max!);
     } else {
-      return min != null && addMinutes(selected, -12 * 60).isBefore(min);
+      return min != null && addMinutes(selected, -12 * 60).isBefore(min!);
     }
   }
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
 import 'dart:html';
-import 'package:js_shims/js_shims.dart';
+import 'package:node_shims/node_shims.dart';
 import 'package:angular_forms/angular_forms.dart';
 
 
@@ -16,40 +16,40 @@ const RATING_VALUE_ACCESSOR = ExistingProvider.forToken(
 /// you will need to add a link to [`glyphicons.css`](https://github.com/valor-software/ng2-bootstrap/blob/master/demo/assets/css/glyphicons.css)
 ///
 /// [demo](http://dart-league.github.io/ng_bootstrap/#accordion)
-@Component (selector: 'bs-rating',
+@Component(selector: 'bs-rating',
     templateUrl: 'rating.html',
     directives: [coreDirectives, formDirectives],
     providers: [RATING_VALUE_ACCESSOR])
 class BsRatingComponent extends NumberValueAccessor implements OnInit {
   final HtmlElement element;
-  BsRatingComponent(this.element) : super(null);
+  BsRatingComponent(this.element) : super(HtmlElement());
 
   /// maximum number of icons
-  @Input() num max;
+  @Input() int max = 5;
 
   ///
-  @Input() List range;
+  @Input() List? range;
 
   ///
-  num value;
+  int value = 1;
 
   ///
-  num preValue;
+  int preValue = 0;
 
   /// array of icons titles, default: (`["one", "two", "three", "four", "five"]`)
-  @Input() List<String> titles;
+  @Input() List<String> titles = ['one', 'two', 'three', 'four', 'five'];
 
   /// selected icon class
-  @Input() String stateOn;
+  @Input() String stateOn = 'fas fa-star';
 
   /// unselected icon class
-  @Input() String stateOff;
+  @Input() String stateOff = 'far fa-star';
 
   /// if `true` will not react on any user events
-  @Input() bool readonly;
+  @Input() bool readonly = false;
 
   /// array of custom icons classes
-  @Input() List ratingStates;
+  @Input() List ratingStates = [];
 
   final _onHoverCtrl = StreamController<int>.broadcast();
 
@@ -64,19 +64,21 @@ class BsRatingComponent extends NumberValueAccessor implements OnInit {
   /// initialize attributes
   @override
   void ngOnInit() {
-    max ??= 5;
-    readonly = readonly == true;
-    stateOn ??= 'fas fa-star';
-    stateOff ??= 'far fa-star';
-    titles = titles != null && titles.isNotEmpty ? titles : ['one', 'two', 'three', 'four', 'five'];
-    ratingStates ??= [];
+    // max ??= 5;
+    // readonly = readonly == true;
+    // stateOn ??= 'fas fa-star';
+    // stateOff ??= 'far fa-star';
+    // titles = titles != null && titles.isNotEmpty ? titles : ['one', 'two', 'three', 'four', 'five'];
+    // ratingStates ??= [];
     range = _buildTemplateObjects();
   }
 
   /// update model to view
   @override
   void writeValue(_value) {
-    onChange((value = preValue = _value ??= 0));
+    if(_value is int){
+    onChange((value = preValue = _value).toDouble());
+    }
   }
 
   /// build the template of the objects that will be rendered
@@ -97,13 +99,13 @@ class BsRatingComponent extends NumberValueAccessor implements OnInit {
 
   /// change the value of the model
   void rate(num value) {
-    if (!readonly && value >= 0 && value <= range.length) {
+    if (!readonly && value >= 0 && value <= (range?.length ?? 0)) {
       writeValue(value);
     }
   }
 
   /// fired when a mouse enters to the icon, and it change the [value] of the rating
-  void enter(num _value) {
+  void enter(int _value) {
     if (!readonly) {
       value = _value;
       _onHoverCtrl.add(_value);

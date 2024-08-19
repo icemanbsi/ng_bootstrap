@@ -18,7 +18,7 @@ class BsPaginationComponent extends BsPagerComponent implements OnInit {
 //  @Input('class') String classes = "";
 
   /// limit number for page links in pager
-  @Input() int maxSize;
+  @Input() int? maxSize;
 
   /// if `true` current page will be in the middle of pages list
   @Input() bool rotate = true;
@@ -68,23 +68,23 @@ class BsPaginationComponent extends BsPagerComponent implements OnInit {
     // Default page limits
     var startPage = 1;
     var endPage = totalPages;
-    var isMaxSized = maxSize != null && maxSize < totalPages;
+    var isMaxSized = maxSize != null && maxSize! < totalPages;
     // recompute if maxSize
     if (isMaxSized) {
       if (rotate) {
         // Current page is displayed in the middle of the visible ones
-        startPage = math.max(currentPage - (maxSize / 2).floor(), 1);
-        endPage = startPage + maxSize - 1;
+        startPage = math.max(currentPage - ((maxSize ?? 0) / 2).floor(), 1);
+        endPage = startPage + (maxSize ?? 0) - 1;
         // Adjust if limit is exceeded
         if (endPage > totalPages) {
           endPage = totalPages;
-          startPage = endPage - maxSize + 1;
+          startPage = endPage - (maxSize ?? 0) + 1;
         }
       } else {
         // Visible pages are paginated with maxSize
-        startPage = (((currentPage / maxSize).ceil() - 1) * maxSize) + 1;
+        startPage = (((currentPage / (maxSize ?? 0)).ceil() - 1) * (maxSize ?? 0)) + 1;
         // Adjust last page if limit is exceeded
-        endPage = math.min(startPage + maxSize - 1, totalPages);
+        endPage = math.min(startPage + (maxSize ?? 0) - 1, totalPages);
       }
     }
     // Add page number links

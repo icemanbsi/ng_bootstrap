@@ -48,7 +48,7 @@ abstract class _$PostSerializable{// extends SerializableMap {
     // throwFieldNotFoundException(__key, 'Post');
   }
 
-  Iterable<String> get keys =>null;// PostClassMirror.fields.keys;
+  Iterable<String>? get keys =>null;// PostClassMirror.fields.keys;
 }
 
 // **************************************************************************

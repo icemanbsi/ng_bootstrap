@@ -7,15 +7,29 @@ authors:
   - Ismael Blasco <isdswii@gmail.com>
 homepage: https://github.com/dart-league/ng_bootstrap
 environment:
-  sdk: '>=2.10.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
+publish_to: none
 dependencies:
   angular: ^7.0.2
-  js_shims: ^1.0.0
+  node_shims: 
+    git:
+      url: https://github.com/icemanbsi/node_shims.git
+      ref: master
   intl: ^0.17.0
-  bootstrap_sass: ^4.3.1
-  stream_transform: ^2.0.0
-  font_awesome: ^5.10.1
+  bootstrap_sass:
+    git:
+      url: https://github.com/icemanbsi/bootstrap_sass.git
+      ref: master
+  stream_transform: ^2.1.0
+  font_awesome: 
+    git:
+     url: https://github.com/icemanbsi/Font-Awesome.git
+     ref: master
   angular_forms: ^4.0.1
+  string_converters: 
+    git:
+     url: https://github.com/icemanbsi/string_converters.git
+     ref: master
 dev_dependencies:
   build_runner: any
   sass_builder: ^2.1.1

@@ -1,5 +1,5 @@
 import 'package:angular/angular.dart';
-import 'package:js_shims/js_shims.dart';
+import 'package:node_shims/node_shims.dart';
 import 'dart:html';
 import 'dart:async';
 import 'package:ng_bootstrap/components/collapse/collapse.dart';
@@ -18,7 +18,7 @@ const bsAccordionDirectives = [BsAccordionComponent, BsAccordionPanelComponent];
 /// or [bootstrap 4](http://v4-alpha.getbootstrap.com/components/collapse/#accordion-example)
 ///
 /// [demo](http://dart-league.github.io/ng_bootstrap/#accordion)
-@Component (selector: 'bs-accordion',
+@Component(selector: 'bs-accordion',
 //    host: const { '[class.panel-group]' : 'true'},
     template: '<ng-content></ng-content>',
     directives: [coreDirectives, BsAccordionPanelComponent])
@@ -26,11 +26,11 @@ class BsAccordionComponent implements AfterContentInit {
   BsAccordionComponent(this._changeDetectorRef);
 
   /// if `true` expanding one item will close all others
-  @Input() bool closeOthers;
+  @Input() bool closeOthers = false;
 
   /// provides the list of children panels
   @ContentChildren(BsAccordionPanelComponent)
-  List<BsAccordionPanelComponent> panels;
+  List<BsAccordionPanelComponent> panels = [];
 
   final ChangeDetectorRef _changeDetectorRef;
 
@@ -79,17 +79,17 @@ class BsAccordionPanelComponent implements OnInit {
   final ChangeDetectorRef _changeDetectorRef;
 
   /// instance of the parent [BsAccordionComponent]
-  BsAccordionComponent parentAccordion;
+  BsAccordionComponent? parentAccordion;
 
   /// provides an HTML template of the Heading
-  TemplateRef headingTemplate;
+  TemplateRef? headingTemplate;
 
   /// provides an ability to use Bootstrap's contextual panel classes (`panel-primary`, `panel-success`,
   /// `panel-info`, etc...). List of all available classes [link](http://getbootstrap.com/components/#panels-alternatives)
-  @Input() String panelClass;
+  @Input() String panelClass = '';
 
   /// clickable text in accordion's group header
-  @Input() String heading;
+  @Input() String heading = '';
 
   /// if `true` disables accordion group
   @Input() bool isDisabled = false;
@@ -111,14 +111,14 @@ class BsAccordionPanelComponent implements OnInit {
     isOpenTimer = Timer(Duration(milliseconds: 250), () {
       _isOpen = value;
       if (truthy(value)) {
-        parentAccordion.closeOtherPanels(this);
+        parentAccordion?.closeOtherPanels(this);
       }
       _isOpenChangeCtrl.add(value);
       _changeDetectorRef.markForCheck();
     });
   }
 
-  Timer isOpenTimer;
+  Timer? isOpenTimer;
 
   /// initialize the default values of the attributes
   @override

@@ -6,14 +6,14 @@ const NG_BOOTSTRAP_TABS_DIRECTIVES = [BsTabComponent, BsTabsComponent, BsTabCont
 
 /// todo(adaojunior): refactor this component
 /// https://github.com/angular/angular/issues/8563
-@Component (
+@Component(
     selector: 'bs-tabs',
     templateUrl: 'tabs.html',
     directives: [coreDirectives])
 class BsTabsComponent implements AfterContentInit{
   /// children tabs
   @ContentChildren(BsTabComponent)
-  List<BsTabComponent> tabs;
+  List<BsTabComponent> tabs = [];
 
   final _onTabChangeCtrl = StreamController<BsTabComponent>.broadcast();
 
@@ -21,7 +21,7 @@ class BsTabsComponent implements AfterContentInit{
   @Output() Stream<BsTabComponent> get onTabChange => _onTabChangeCtrl.stream;
 
   /// handles selected tab
-  BsTabComponent _selected;
+  late BsTabComponent _selected;
 
   /// gets the selected tab
   BsTabComponent get selected => _selected;
@@ -30,7 +30,7 @@ class BsTabsComponent implements AfterContentInit{
   void ngAfterContentInit(){
     _selected = tabs.firstWhere((BsTabComponent tab) => tab.active, orElse: () {
       final tab = tabs.first;
-      tab?.active = true;
+      tab.active = true;
       return tab;
     });
   }
@@ -50,13 +50,13 @@ class BsTabsComponent implements AfterContentInit{
 @Directive(selector: 'template[bsTab]')
 class BsTabComponent {
   /// reference to the template
-  TemplateRef templateRef;
+  TemplateRef? templateRef;
 
   /// handles if the tab is active
   @Input() bool active = false;
 
   /// handles which panel will be selected
-  @Input() String select;
+  @Input() String? select;
 
   /// constructs a [BsTabComponent]
   BsTabComponent(this.templateRef);
@@ -68,13 +68,13 @@ class BsTabComponent {
     directives: [coreDirectives])
 class BsTabContentComponent implements AfterContentInit {
   /// [BsTabsComponent] target the this content is listening to
-  @Input('for') BsTabsComponent target;
+  @Input('for') late BsTabsComponent target;
 
   /// displayed panels
   @ContentChildren(BsTabPanelDirective)
-  List<BsTabPanelDirective> panels;
+  List<BsTabPanelDirective> panels = [];
 
-  BsTabPanelDirective _current;
+  late BsTabPanelDirective _current;
 
   /// Current tab panel
   BsTabPanelDirective get current => _current;
@@ -95,7 +95,7 @@ class BsTabContentComponent implements AfterContentInit {
 class BsTabPanelDirective {
   TemplateRef templateRef;
 
-  @Input() String name;
+  @Input() String? name;
 
   BsTabPanelDirective(this.templateRef);
 }

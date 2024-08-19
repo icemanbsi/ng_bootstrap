@@ -9,13 +9,13 @@ class BsColumnDirective {
   /// * 'DESC': for descending sorting
   /// * 'NONE': for non-sorting
   /// * 'NO_SORTABLE': for column not sortable
-  @Input() String sort;
+  @Input() String sort = 'NONE';
 
   /// Name of the field associated with the column
-  @Input() String fieldName;
+  @Input() String fieldName = '';
 
   /// Value displayed in the column header
-  @Input() String header;
+  @Input() String header = '';
 
   /// name of field or function used to sort this column
   @Input() var/*String | Function*/ orderBy;
@@ -23,7 +23,7 @@ class BsColumnDirective {
   /// style of the column
   ///
   ///     <bs-column style="width: 120px; flex: none"></bs-column>
-  @Input() String style;
+  @Input() String? style;
 
   /// class of the column
   ///
@@ -31,13 +31,13 @@ class BsColumnDirective {
   @Input() var ngClass;
 
   @ContentChild(TemplateRef)
-  TemplateRef templateRef;
+  TemplateRef? templateRef;
 
   @ContentChild(BsColumnEditorDirective)
-  BsColumnEditorDirective editor;
+  BsColumnEditorDirective? editor;
 
   dynamic /* String | Map<String, dynamic> */ filterValue;
 
   @ContentChild(BsColumnFiltererDirective)
-  BsColumnFiltererDirective filterer;
+  BsColumnFiltererDirective? filterer;
 }

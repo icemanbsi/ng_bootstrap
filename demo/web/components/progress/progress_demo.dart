@@ -4,17 +4,17 @@ import 'package:angular/angular.dart';
 import 'package:ng_bootstrap/ng_bootstrap.dart';
 import 'package:angular_forms/angular_forms.dart';
 
-@Component (selector: 'progress-demo',
+@Component(selector: 'progress-demo',
     templateUrl: 'progress_demo.html',
     directives: [BsProgressComponent, BsToggleButtonDirective, coreDirectives, formDirectives])
 class ProgressDemo {
-  num max = 200;
+  int max = 200;
 
   bool showWarning = false;
 
-  num value;
+  int value = 0;
 
-  String type;
+  String type = '';
 
   List stacked = [];
 

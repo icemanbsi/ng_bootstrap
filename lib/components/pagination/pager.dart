@@ -6,7 +6,7 @@ import 'package:angular/angular.dart';
 /// Quick "previous" and "next" links for simple
 /// pagination implementations with light markup and styles.
 /// It’s great for simple sites like blog or magazines.
-@Component (selector: 'bs-pager',
+@Component(selector: 'bs-pager',
     templateUrl: 'pager.html',
     directives: [coreDirectives])
 class BsPagerComponent {
@@ -29,7 +29,7 @@ class BsPagerComponent {
   int get currentPage => _currentPage;
 
   /// sets the index of selected page
-  @Input() set currentPage(num value) {
+  @Input() set currentPage(int? value) {
     _currentPage = value ?? 1;
     _currentPageChangeCtrl.add(_currentPage);
   }
@@ -61,7 +61,7 @@ class BsPagerComponent {
   int get itemsPerPage => _itemsPerPage;
 
   /// sets the maximum number of items per page. If value less than 1 will display all items on one page
-  @Input() set itemsPerPage(int v) {
+  @Input() set itemsPerPage(int? v) {
     _itemsPerPage = v ?? 0;
     totalPages = calculateTotalPages();
   }
@@ -78,7 +78,7 @@ class BsPagerComponent {
   }
 
   /// calculates total pages
-  num calculateTotalPages() {
+  int calculateTotalPages() {
     var totalPages = itemsPerPage < 1 ? 1 : (totalItems / itemsPerPage).ceil();
     return math.max(totalPages ?? 0, 1);
   }
@@ -90,7 +90,7 @@ class BsPagerComponent {
   bool noNext() => currentPage >= totalPages;
 
   /// sets clicked item as selected
-  void selectPage(num _page, [MouseEvent event]) {
+  void selectPage(int _page, [MouseEvent? event]) {
     if (event != null) {
       event.preventDefault();
     }
@@ -98,7 +98,7 @@ class BsPagerComponent {
         && currentPage != _page
         && _page > 0
         && _page <= totalPages) {
-      dynamic target = event.target;
+      dynamic target = event?.target;
       target.blur();
       _currentPageChangeCtrl.add(_page);
       _totalPagesChangeCtrl.add(totalPages);

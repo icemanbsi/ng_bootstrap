@@ -14,23 +14,23 @@ class BsPromptService {
   BsPromptService(this._ar);
 
   /// Creates a modal with a simple text content
-  Future<BsPromptComponent> call(String content, {String header, List<BsModalButton> buttons}) async {
+  Future<BsPromptComponent> call(String content, {String? header, List<BsModalButton>? buttons}) async {
 
     return (_ar.bootstrap(ng_prompt.BsPromptComponentNgFactory).instance as BsPromptComponent)
       ..header = header
       ..content = content
-      ..buttons = buttons
+      ..buttons = buttons ?? []
       ..show();
   }
 
   ///Creates a modal with a component as content
   Future<BsPromptComponent> withComponent(ComponentFactory componentFactory,
-      {String header, List<BsModalButton> buttons}) async {
+      {String? header, List<BsModalButton>? buttons}) async {
 
     return (_ar.bootstrap(ng_prompt.BsPromptComponentNgFactory).instance as BsPromptComponent)
       ..header = header
       ..component = componentFactory
-      ..buttons = buttons
+      ..buttons = buttons ?? []
       ..show();
   }
 }

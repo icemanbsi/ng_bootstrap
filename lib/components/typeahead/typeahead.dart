@@ -25,7 +25,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
   NgModel ngModel;
 
   @ContentChild(TemplateRef)
-  TemplateRef itemTemplate;
+  late TemplateRef itemTemplate;
 
   /// local value to handle loading value
   bool loadingVal = false;
@@ -63,21 +63,21 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
 
   /// minimal wait time after last character typed before typeahead kicks-in
   @Input()
-  num waitMs = 400;
+  int waitMs = 400;
 
   /// maximum length of options items list
   @Input()
-  num optionsLimit = 200;
+  int optionsLimit = 200;
 
   /// (*not implemented*) (`?boolean=true`) - if `false` restrict model values to the ones selected from the popup only will be provided
   // todo: not yet implemented
   @Input()
-  bool editable;
+  bool editable = false;
 
   /// (*not implemented*) (`?boolean=true`) - if `false` the first match automatically will not be focused as you type
   // todo: not yet implemented
   @Input()
-  bool focusFirst;
+  bool focusFirst = false;
 
   /// (*not implemented*) (`?any`) - format the ngModel result after selection
   // todo: not yet implemented
@@ -87,12 +87,12 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
   /// (*not implemented*) (`?boolean=false`) - if `true` automatically select an item when there is one option that exactly matches the user input
   // todo: not yet implemented
   @Input()
-  bool selectOnExact;
+  bool selectOnExact = false;
 
   /// (*not implemented*) (`?boolean=false`) - if `true` select the currently highlighted match on blur
   // todo: not yet implemented
   @Input()
-  bool selectOnBlur;
+  bool selectOnBlur = false;
 
   /// (*not implemented*) (`?boolean=true`) - if `false` don't focus the input element the typeahead directive is associated with on selection
   // todo: not yet implemented
@@ -101,7 +101,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
 
   /// If [source] items is an iterable of [Object] or [Map] we use this attribute to get the value of the field that matches [optionField]
   @Input()
-  String optionField;
+  String? optionField;
 
   /// provides the source of the dropdown list, it could be an [Iterable] or a [Function],
   /// if a function is passed, it means the list of elements could be loaded asynchronously.
@@ -113,7 +113,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
 
   /// if `true` active option will be selected automatically
   @Input()
-  bool autocomplete;
+  bool autocomplete = false;
 
   /// if `true` the dropdown-menu will be open, and the date-picker visible
   bool isOpen = false;
@@ -207,7 +207,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
   }
 
   /// selects the matched item
-  void selectMatch(value, [Event e]) {
+  void selectMatch(value, [Event? e]) {
     ngModel.viewToModelUpdate('');
     Future.delayed(const Duration(milliseconds: 1),
         () => ngModel.viewToModelUpdate(_itemString(value)));

@@ -11,7 +11,7 @@ class TimepickerDemo {
   String mstep = '15';
   int get mstepInt => int.parse(mstep);
   bool ismeridian = true;
-  String mytime = DateTime.now().toString();
+  String? mytime = DateTime.now().toString();
   dynamic options = {
     'hstep': [1, 2, 3],
     'mstep': [1, 5, 10, 15, 25, 30]

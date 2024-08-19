@@ -31,7 +31,7 @@ class BsTabsxComponents implements OnInit, AfterContentInit {
 
   @Input()
   @HostBinding('attr.placement')
-  String placement;
+  String placement = 'top';
 
   /// if `true` tabs will be justified
   @Input()
@@ -39,7 +39,7 @@ class BsTabsxComponents implements OnInit, AfterContentInit {
 
   /// navigation context class: 'tabs' or 'pills'
   @Input()
-  String type;
+  String type = 'tabs';
 
   /// List of sub tabs
   @ContentChildren(BsTabxDirective)
@@ -48,8 +48,8 @@ class BsTabsxComponents implements OnInit, AfterContentInit {
   /// initialize attributes
   @override
   void ngOnInit() {
-    type ??= 'tabs';
-    placement ??= 'top';
+    // type ??= 'tabs';
+    // placement ??= 'top';
   }
 
   @override
@@ -100,7 +100,7 @@ class BsTabxDirective {
   bool tabPane = true;
 
   /// provides the injected parent tabset
-  BsTabsxComponents tabsx;
+  BsTabsxComponents? tabsx;
 
   /// if `true` tab can not be activated
   @Input()
@@ -108,11 +108,11 @@ class BsTabxDirective {
 
   /// tab header text
   @Input()
-  String header;
+  String? header;
 
   /// Template reference to the heading template
   @ContentChild(BsTabxHeaderDirective)
-  BsTabxHeaderDirective headerTemplate;
+  late BsTabxHeaderDirective headerTemplate;
 
   final _selectCtrl = StreamController<BsTabxDirective>.broadcast();
 
@@ -149,7 +149,7 @@ class BsTabxDirective {
 }
 
 /// Creates a new tab header template
-@Directive (selector: 'template[bs-tabx-header]')
+@Directive(selector: 'template[bs-tabx-header]')
 class BsTabxHeaderDirective {
   /// constructs a [BsTabxHeaderDirective] injecting its own [templateRef] and its parent [tab]
   BsTabxHeaderDirective(this.templateRef);

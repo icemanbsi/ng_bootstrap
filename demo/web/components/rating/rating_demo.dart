@@ -11,7 +11,7 @@ class RatingDemo {
   num max = 10;
   num rate = 7;
   bool isReadonly = false;
-  num overStar;
+  num? overStar;
   num percent = 0;
   var ratingStates = [
     {'stateOn': 'fas fa-check', 'stateOff': 'fa fa-circle'},

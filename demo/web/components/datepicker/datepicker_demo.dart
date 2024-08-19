@@ -6,18 +6,18 @@ import 'package:ng_bootstrap/ng_bootstrap.dart';
     templateUrl: 'datepicker_demo.html',
     directives: [BsDatePickerComponent, BsDatePickerPopupComponent, coreDirectives, formDirectives])
 class DatepickerDemo {
-  DateTime dt = DateTime.now();
+  DateTime? dt = DateTime.now();
   DateTime dt2 = DateTime.now();
-  List<Map> events;
-  DateTime tomorrow;
-  DateTime afterTomorrow;
+  late List<Map> events;
+  late DateTime tomorrow;
+  late DateTime afterTomorrow;
   List<String> formats = [
     'dd-MM-yyyy',
     'yyyy/MM/dd',
     'dd.MM.yy',
     'yMd'
   ];
-  String format;
+  late String format;
   Map<String,dynamic> dateOptions = {'formatYear': 'YY', 'startingDay': 1};
   bool opened = false;
 
