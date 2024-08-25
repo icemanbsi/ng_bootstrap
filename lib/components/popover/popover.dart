@@ -1,4 +1,4 @@
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:ng_bootstrap/components/tooltip/tooltip.dart';
 import 'dart:html';
 

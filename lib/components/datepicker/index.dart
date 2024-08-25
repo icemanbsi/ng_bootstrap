@@ -1,14 +1,14 @@
 library bs_date_picker;
 
 import 'dart:html';
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:intl/intl.dart';
 import 'package:node_shims/node_shims.dart';
 import 'package:ng_bootstrap/components/dropdown/index.dart';
 import 'package:ng_bootstrap/components/button/toggle.dart';
-import 'package:angular_forms/angular_forms.dart';
-import 'package:angular_forms/src/directives/shared.dart';
-import 'package:angular_forms/src/directives/control_value_accessor.dart';
+import 'package:ngforms/angular_forms.dart';
+import 'package:ngforms/src/directives/shared.dart';
+import 'package:ngforms/src/directives/control_value_accessor.dart';
 
 part 'date_picker.dart';
 part 'date_picker_popup.dart';

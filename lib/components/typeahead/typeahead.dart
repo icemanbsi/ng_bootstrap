@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:html';
 
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'package:ng_bootstrap/components/dropdown/index.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:ng_bootstrap/components/button/toggle.dart';
-import 'package:angular_forms/angular_forms.dart';
+import 'package:ngforms/angular_forms.dart';
 
 // todo: options loading by http not yet implemented
 /// Creates a type-ahead component

@@ -1,5 +1,5 @@
 import 'dart:html';
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'dart:async';
 
 /// Collapse component allows you to toggle content on your pages with a bit of JavaScript and some

@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 import 'dart:html';
 import 'package:node_shims/node_shims.dart';
-import 'package:angular_forms/angular_forms.dart';
+import 'package:ngforms/angular_forms.dart';
 
 
 const RATING_VALUE_ACCESSOR = ExistingProvider.forToken(
