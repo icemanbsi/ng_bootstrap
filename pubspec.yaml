@@ -10,12 +10,12 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 publish_to: none
 dependencies:
-  ngdart: ^7.1.1
+  ngdart: ^8.0.0-dev.4
   node_shims: 
     git:
       url: https://github.com/icemanbsi/node_shims.git
       ref: master
-  intl: ^0.17.0
+  intl: ^0.18.1
   bootstrap_sass:
     git:
       url: https://github.com/icemanbsi/bootstrap_sass.git
@@ -25,7 +25,7 @@ dependencies:
     git:
      url: https://github.com/icemanbsi/Font-Awesome.git
      ref: master
-  ngforms: ^4.1.1
+  ngforms: ^5.0.0-dev.3
   string_converters: 
     git:
      url: https://github.com/icemanbsi/string_converters.git
