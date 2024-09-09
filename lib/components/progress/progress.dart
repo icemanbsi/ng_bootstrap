@@ -40,7 +40,7 @@ class BsProgressComponent implements OnInit, OnDestroy {
   String get percentage => (value / max * 100).toString() + '%';
 
   @ContentChild(TemplateRef)
-  late TemplateRef labelTemplate;
+  TemplateRef? labelTemplate;
 
   /// Handles the width of the element
   String? elementWidth;

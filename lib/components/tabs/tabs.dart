@@ -68,7 +68,7 @@ class BsTabComponent {
     directives: [coreDirectives])
 class BsTabContentComponent implements AfterContentInit {
   /// [BsTabsComponent] target the this content is listening to
-  @Input('for') late BsTabsComponent target;
+  @Input('for') BsTabsComponent? target;
 
   /// displayed panels
   @ContentChildren(BsTabPanelDirective)
@@ -81,8 +81,10 @@ class BsTabContentComponent implements AfterContentInit {
 
   @override
   void ngAfterContentInit() {
-    _setCurrent(target.selected);
-    target.onTabChange.listen(_setCurrent);
+    if(target != null){
+      _setCurrent(target!.selected);
+      target!.onTabChange.listen(_setCurrent);
+    }
   }
 
   void _setCurrent(BsTabComponent tab){

@@ -79,7 +79,7 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
   Stream<bool> get isOpenChange => _isOpenChangeCtrl.stream;
 
   @ContentChild(BsDropdownToggleDirective)
-  late BsDropdownToggleDirective dropdownToggle;
+  BsDropdownToggleDirective? dropdownToggle;
 
   /// initializes the dropdown attributes
   @override
@@ -92,7 +92,7 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
 
   @override
   void ngAfterContentInit() {
-    dropdownToggle.dropdown = this;
+    dropdownToggle?.dropdown = this;
   }
 
   /// removes the dropdown from the DOM
@@ -157,7 +157,7 @@ class BsDropdownDirective implements OnInit, OnDestroy, AfterContentInit {
 
   /// focus toggle element
   void _focusToggleElement() =>
-      dropdownToggle.elementRef.focus();
+      dropdownToggle?.elementRef.focus();
 
   void _keyBindFilter(KeyboardEvent event) {
     if (event.which == KeyCode.ESC) {

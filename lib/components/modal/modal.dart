@@ -42,7 +42,7 @@ class BsModalComponent {
   final ComponentLoader _loader;
 
   @ViewChild('contentRef', read: ViewContainerRef)
-  late ViewContainerRef contentRef;
+  ViewContainerRef? contentRef;
 
   late ComponentRef? _component;
 
@@ -56,7 +56,9 @@ class BsModalComponent {
       if(_component != null){
         _component?.destroy();
       }
-      _component = _loader.loadNextToLocation(component, contentRef);
+      if(contentRef != null){
+        _component = _loader.loadNextToLocation(component, contentRef!);
+      }
     }
   }
 

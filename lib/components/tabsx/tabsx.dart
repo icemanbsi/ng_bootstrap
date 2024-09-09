@@ -112,7 +112,7 @@ class BsTabxDirective {
 
   /// Template reference to the heading template
   @ContentChild(BsTabxHeaderDirective)
-  late BsTabxHeaderDirective headerTemplate;
+  BsTabxHeaderDirective? headerTemplate;
 
   final _selectCtrl = StreamController<BsTabxDirective>.broadcast();
 

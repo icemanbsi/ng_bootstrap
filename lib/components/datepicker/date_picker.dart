@@ -42,21 +42,21 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
   DateTime get _initDate => value ?? _now;
 
   @ViewChild(BsDayPickerComponent)
-  late BsDayPickerComponent bsDayPickerComponent;
+  BsDayPickerComponent? bsDayPickerComponent;
 
   @ViewChild(BsMonthPickerComponent)
-  late BsMonthPickerComponent bsMonthPickerComponent;
+  BsMonthPickerComponent? bsMonthPickerComponent;
 
   @ViewChild(BsYearPickerComponent)
-  late BsYearPickerComponent bsYearPickerComponent;
+  BsYearPickerComponent? bsYearPickerComponent;
 
   // todo: add formatter value to DateTime object
   /// initializes attributes
   @override
   void ngOnInit() {
-    bsDayPickerComponent.datePicker = this;
-    bsMonthPickerComponent.datePicker = this;
-    bsYearPickerComponent.datePicker = this;
+    bsDayPickerComponent?.datePicker = this;
+    bsMonthPickerComponent?.datePicker = this;
+    bsYearPickerComponent?.datePicker = this;
 
     formatDay = or(formatDay, FORMAT_DAY);
     formatMonth = or(formatMonth, FORMAT_MONTH);
@@ -114,13 +114,13 @@ class BsDatePickerComponent extends BsDatePickerBase implements OnInit {
   /// performs the view refresh
   void refreshView() {
     if (datePickerMode == 'day') {
-      bsDayPickerComponent.refreshViewHandler();
+      bsDayPickerComponent?.refreshViewHandler();
     }
     if (datePickerMode == 'month') {
-      bsMonthPickerComponent.refreshViewHandler();
+      bsMonthPickerComponent?.refreshViewHandler();
     }
     if (datePickerMode == 'year') {
-      bsYearPickerComponent.refreshViewHandler();
+      bsYearPickerComponent?.refreshViewHandler();
     }
   }
 
