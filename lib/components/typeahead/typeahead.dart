@@ -25,7 +25,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
   NgModel ngModel;
 
   @ContentChild(TemplateRef)
-  TemplateRef itemTemplate;
+  TemplateRef? itemTemplate;
 
   /// local value to handle loading value
   bool loadingVal = false;
