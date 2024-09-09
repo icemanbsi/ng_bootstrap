@@ -59,7 +59,7 @@ class BsTabComponent {
   @Input() String? select;
 
   /// constructs a [BsTabComponent]
-  BsTabComponent(this.templateRef);
+  BsTabComponent(@Optional() this.templateRef);
 }
 
 @Component(
