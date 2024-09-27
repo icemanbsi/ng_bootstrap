@@ -15855,7 +15855,7 @@ bs-pager .disabled > span {
   cursor: not-allowed;
 }
 
-bs-search-clear {
+div.bs-search-clear {
   position: absolute;
   right: 2.625rem;
   top: 0;
