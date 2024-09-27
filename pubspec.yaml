@@ -25,7 +25,7 @@ dependencies:
     git:
      url: https://github.com/icemanbsi/Font-Awesome.git
      ref: master
-  ngforms: ^5.0.0-dev.3
+  ngforms: ^5.0.0-dev.1
   string_converters: 
     git:
      url: https://github.com/icemanbsi/string_converters.git
