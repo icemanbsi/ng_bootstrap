@@ -225,7 +225,7 @@ class BsTypeAheadComponent extends DefaultValueAccessor {
 
   /// highlights the matching part of the matched item. For example if user types "a" and the matched
   /// word is "Alaska" the result will be `<strong>A</strong>l<strong>a</strong>sk<strong>a</strong>`
-  String highlight(item, String query) {
+  String highlight(item, String? query) {
     String itemStr = _itemString(item);
     // Replaces the capture string with a the same string inside of a "strong" tag
     return query != null && query.isNotEmpty

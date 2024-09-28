@@ -7,9 +7,8 @@
            (ngModelChange)="processMatches($event)"
            (click)="$event.stopPropagation()"
            (keyup)="onTypeaheadChange($event)">
-    <div class="bs-search-clear"
+    <div class="bs-search-clear fa fa-times"
         *ngIf="ngModel.viewModel.length > 0"
-        class="fa fa-times"
         (click)="clear($event)"></div>
     <span class="input-group-append">
       <bs-toggle-button class="btn btn-secondary"
