@@ -14,7 +14,7 @@ dependencies:
   node_shims: 
     git:
       url: https://github.com/icemanbsi/node_shims.git
-      ref: master
+      ref: ngdart8
   intl: ^0.18.1
   bootstrap_sass:
     git:
