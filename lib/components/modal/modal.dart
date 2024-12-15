@@ -80,7 +80,9 @@ class BsModalComponent {
 
   Future<bool> hide([BsModalButton? button]) async {
     loading = true;
-    _closeCtrl.add(await button?.onClick?.call());
+    if(button != null){
+      _closeCtrl.add(await button.onClick?.call());
+    }
     showModal = false;
     loading = false;
     document.body?.classes.remove('modal-open');
