@@ -83,6 +83,9 @@ class BsModalComponent {
     if(button != null){
       _closeCtrl.add(await button.onClick?.call());
     }
+    else {
+      _closeCtrl.add('close');
+    }
     showModal = false;
     loading = false;
     document.body?.classes.remove('modal-open');
